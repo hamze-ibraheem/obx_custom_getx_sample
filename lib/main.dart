@@ -50,7 +50,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var student = Student();
+  // var student = Student();
+  final student = Student(name: 'Hamza', age: 37).obs;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Obx(
               () => Text(
-                'Name is ${student.name.value}',
+                'Name is ${student.value.name}',
               ),
             ),
             const SizedBox(
@@ -96,7 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () =>
-                  student.name.value = student.name.value.toUpperCase(),
+                  // student.value.name =
+                  //     student.value.name.toString().toUpperCase(),
+                  student.update((student) {
+                student!.name = student.name.toString().toUpperCase();
+              }),
               child: const Text(
                 'Upper case name',
               ),
@@ -106,7 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () =>
-                  student.name.value = student.name.value.toLowerCase(),
+                  // student.value.name =
+                  //     student.value.name.toString().toUpperCase(),
+                  student.update((student) {
+                student!.name = student.name.toString().toLowerCase();
+              }),
               child: const Text(
                 'Lower case name',
               ),
